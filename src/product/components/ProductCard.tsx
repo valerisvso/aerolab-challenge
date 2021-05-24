@@ -55,7 +55,7 @@ const ProductCard: React.FC<Props> = ({product, isSelected, ...props}) => {
           <Image height={4} src={Coin} width={4} />
         </Stack>
         <Center>
-          <Image objetctFif="cointain" src={product.img.url} width={64} />
+          <Image height={64} objectFit="contain" src={product.img} width={64} />
         </Center>
         <Divider />
         <Stack alignItems="flex-start" spacing={0}>

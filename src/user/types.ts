@@ -5,5 +5,18 @@ export interface User {
   name: string;
   points: number;
   redeemHistory: Product[];
-  //   createDate: "new Date(1510171520852)";
+  createDate: string;
+}
+
+export interface HistoryItem {
+  _id: string;
+  name: string;
+  category: string;
+  img: {
+    url: string;
+    hdUrl: string;
+  };
+  cost: number;
+  productId: string;
+  createDate: string;
 }

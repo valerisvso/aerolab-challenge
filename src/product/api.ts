@@ -1,35 +1,38 @@
-import {Product} from "./types";
+import {Product, RawProduct} from "./types";
 
 export default {
   list: (): Promise<Product[]> =>
-    new Promise((resolve) =>
-      setTimeout(
-        () =>
-          resolve([
-            {
-              _id: "5a033eeb364bf301523e9b92",
-              name: "Sandalia Pale Gold YSL",
-              cost: 200,
-              category: "Indumentaria",
-              img: {
-                url: "https://coding-challenge-api.aerolab.co/images/Alienware13-x2.png",
-                hdUrl: "https://coding-challenge-api.aerolab.co/images/Alienware13-x2.png",
-              },
-            },
-            {
-              _id: "5a033f0f364bf301523e9b93",
-              name: "iPhone 7 Case Sea-Blue",
-              cost: 200,
-              category: "Accesorios",
-              img: {
-                url: "https://coding-challenge-api.aerolab.co/images/SamsungTabS2-x1.png",
-                hdUrl: "https://coding-challenge-api.aerolab.co/images/SamsungTabS2-x1.png",
-              },
-            },
-          ]),
-        500,
+    fetch("https://coding-challenge-api.aerolab.co/products", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGEyYjExYTliNzc4MTAwMjA5YzVhOWIiLCJpYXQiOjE2MjEyNzQ5MDZ9.sA7_ybQE0NYpwma7hc0spHCpVjhmrSm0wHDkmaO_zAQ",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "get",
+    })
+      .then((res) => res.json())
+      .then((products) =>
+        products.map((p: RawProduct) => ({
+          id: p["_id"],
+          name: p["name"],
+          category: p["category"],
+          cost: p["cost"],
+          img: p["img"]["url"],
+        })),
       ),
-    ),
-  redeem: (product: Product): Promise<string> =>
-    Promise.resolve("You have redeem the product successfully (${product.name})"),
+
+  redeem: (productId: string) =>
+    fetch("https://coding-challenge-api.aerolab.co/redeem", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGEyYjExYTliNzc4MTAwMjA5YzVhOWIiLCJpYXQiOjE2MjEyNzQ5MDZ9.sA7_ybQE0NYpwma7hc0spHCpVjhmrSm0wHDkmaO_zAQ",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "post",
+      body: JSON.stringify({
+        productId,
+      }),
+    }),
 };

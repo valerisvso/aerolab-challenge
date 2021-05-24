@@ -1,20 +1,50 @@
-import {User} from "./types";
+import {User, HistoryItem} from "./types";
 
 export default {
-  fetch: (): Promise<User> =>
-    new Promise((resolve) =>
-      setTimeout(
-        () =>
-          resolve({
-            id: "5a03638052fd231590d04eb5",
-            name: "John Kite",
-            points: 2000,
-            redeemHistory: [],
-          }),
-        500,
+  user: () =>
+    fetch("https://coding-challenge-api.aerolab.co/user/me", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGEyYjExYTliNzc4MTAwMjA5YzVhOWIiLCJpYXQiOjE2MjEyNzQ5MDZ9.sA7_ybQE0NYpwma7hc0spHCpVjhmrSm0wHDkmaO_zAQ",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "get",
+    }),
+  points: (amount: number) =>
+    fetch("https://coding-challenge-api.aerolab.co/user/points", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGEyYjExYTliNzc4MTAwMjA5YzVhOWIiLCJpYXQiOjE2MjEyNzQ5MDZ9.sA7_ybQE0NYpwma7hc0spHCpVjhmrSm0wHDkmaO_zAQ",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "post",
+      body: JSON.stringify({
+        amount,
+      }),
+    }),
+
+  history: () =>
+    fetch("https://coding-challenge-api.aerolab.co/user/history", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGEyYjExYTliNzc4MTAwMjA5YzVhOWIiLCJpYXQiOjE2MjEyNzQ5MDZ9.sA7_ybQE0NYpwma7hc0spHCpVjhmrSm0wHDkmaO_zAQ",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "get",
+    })
+      .then((res) => res.json())
+      .then((products) =>
+        products.map((p: HistoryItem) => ({
+          id: p["_id"],
+          name: p["name"],
+          category: p["category"],
+          cost: p["cost"],
+          img: p["img"]["url"],
+          itemId: p["productId"],
+          date: p["createDate"],
+        })),
       ),
-    ),
-  points: {
-    add: (amount: number): Promise<number> => Promise.resolve(amount),
-  },
 };

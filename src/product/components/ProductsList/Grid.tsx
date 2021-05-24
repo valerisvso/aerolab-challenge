@@ -9,16 +9,16 @@ interface Props {
 }
 
 const Grid: React.FC<Props> = ({products}) => {
-  const [selected, setSelected] = React.useState<Product["_id"] | null>(null);
+  const [selected, setSelected] = React.useState<Product["id"] | null>(null);
 
   return (
     <ChakraGrid gap={6} templateColumns="repeat(auto-fill, minmax(256px, 1fr))" width="100%">
       {products.map((product) => (
         <ProductCard
-          key={product._id}
-          isSelected={selected === product._id}
+          key={product.id}
+          isSelected={selected === product.id}
           product={product}
-          onClick={() => setSelected(product._id)}
+          onClick={() => setSelected(product.id)}
         />
       ))}
     </ChakraGrid>

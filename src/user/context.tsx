@@ -26,7 +26,7 @@ const UserProvider: React.FC = ({children}) => {
   async function handleRedeem(product: Product) {
     if (!user) return;
 
-    return productApi.redeem(product).then(() => {
+    return productApi.redeem(product._id).then(() => {
       setUser({...user, points: user.points - product.cost});
     });
   }
@@ -34,16 +34,17 @@ const UserProvider: React.FC = ({children}) => {
   async function handleAddPoints(amount: number) {
     if (!user) return;
 
-    return api.points.add(amount).then(() => {
+    return api.points(amount).then(() => {
       setUser({...user, points: user.points + amount});
     });
   }
 
   React.useEffect(() => {
-    api.fetch().then((user) => {
+    api.user().then((res)=> res.json()).then((user: User) => {
       setUser(user);
       setStatus("resolve");
     });
+
   }, []);
 
   if (!user || status === "pending") {
