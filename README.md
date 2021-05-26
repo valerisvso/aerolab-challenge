@@ -25,3 +25,25 @@ El usuario tiene una cantidad definida de puntos y cada producto vale una cantid
 ## Definiciones técnicas
 * La aplicación debe estar publicada y debe ser accesible mediante un link.
 * El código de la aplicación debe estar subida a un repositorio de público acceso.
+
+# Resultado
+
+Aqui esta mi resultado del challenge
+
+## 📱 Screenshot
+
+![aerolab](https://github.com/valerisvso/rick-and-morty-react/blob/master/valerisvso.github.io_rick-and-morty-react_.png)
+
+
+## 📚 Technical Details
+```
+Built entirely:
+- React.js
+- Chakra UI
+```
+
+## ⚒ Deploy 
+👉 https://aerolab-challenge-7dt0rpbaf-valerisvso.vercel.app/
+
+## 🙋 Code by me. 
+@valerisvso
