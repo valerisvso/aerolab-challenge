@@ -40,11 +40,13 @@ const UserProvider: React.FC = ({children}) => {
   }
 
   React.useEffect(() => {
-    api.user().then((res)=> res.json()).then((user: User) => {
-      setUser(user);
-      setStatus("resolve");
-    });
-
+    api
+      .user()
+      .then((res) => res.json())
+      .then((user: User) => {
+        setUser(user);
+        setStatus("resolve");
+      });
   }, []);
 
   if (!user || status === "pending") {
