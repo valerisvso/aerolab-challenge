@@ -26,7 +26,7 @@ const UserProvider: React.FC = ({children}) => {
   async function handleRedeem(product: Product) {
     if (!user) return;
 
-    return productApi.redeem(product._id).then(() => {
+    return productApi.redeem(product.id).then(() => {
       setUser({...user, points: user.points - product.cost});
     });
   }
