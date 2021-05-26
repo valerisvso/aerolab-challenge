@@ -30,11 +30,6 @@ El usuario tiene una cantidad definida de puntos y cada producto vale una cantid
 
 Aqui esta mi resultado del challenge
 
-## 📱 Screenshot
-
-![aerolab](https://github.com/valerisvso/rick-and-morty-react/blob/master/valerisvso.github.io_rick-and-morty-react_.png)
-
-
 ## 📚 Technical Details
 ```
 Built entirely:
